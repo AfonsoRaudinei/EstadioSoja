@@ -27,6 +27,33 @@
             max-width: 800px;
         }
 
+        .logo-space {
+            height: 120px;
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .logo-space img {
+            max-height: 80px;
+            width: auto;
+        }
+
+        .author-info {
+            font-size: 0.95rem;
+            color: #34495e;
+            font-weight: 500;
+        }
+
+        .author-phone {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            font-weight: 400;
+        }
+
         .header h1 {
             font-size: 2.2rem;
             font-weight: 600;
@@ -226,9 +253,11 @@
 </head>
 <body>
     <div class="header">
-        <!-- Espaço reservado para logo - adicione seu logo aqui -->
-        <div class="logo-space" style="height: 80px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center;">
-            <!-- <img src="seu-logo.png" alt="Logo" style="max-height: 80px;"> -->
+        <div class="logo-space">
+            <!-- Descomente e adicione o caminho do logo PNG -->
+            <!-- <img src="logo.png" alt="Logo"> -->
+            <div class="author-info">Raudinei Afonso</div>
+            <div class="author-phone">63 98437-6572</div>
         </div>
         <h1>Calendário Estimado de Estádios Fenológicos – Soja</h1>
         <p>Ciclo de 115 dias após o plantio</p>
