@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendário Estádios Fenológicos - Soja</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8edf2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            max-width: 800px;
+        }
+
+        .logo-space {
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .qr-code {
+            width: 100px;
+            height: 100px;
+            flex-shrink: 0;
+        }
+
+        .qr-code img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .author-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .author-info {
+            font-size: 1.1rem;
+            color: #34495e;
+            font-weight: 600;
+        }
+
+        .author-phone {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            font-weight: 400;
+        }
+
+        .company-logo {
+            width: 80px;
+            height: 80px;
+            flex-shrink: 0;
+        }
+
+        .company-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .header p {
+            font-size: 1rem;
+            color: #7f8c8d;
+            font-weight: 400;
+        }
+
+        .carousel-container {
+            width: 100%;
+            max-width: 1200px;
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 20px 40px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .carousel-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .stage-card {
+            min-width: 220px;
+            background: white;
+            border-radius: 20px;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .stage-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .stage-card.active {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
+        .stage-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .stage-card.active .stage-icon {
+            transform: scale(1.1);
+        }
+
+        .stage-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+
+        .stage-description {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+
+        .stage-day {
+            font-size: 0.9rem;
+            color: #95a5a6;
+            font-weight: 600;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #ecf0f1;
+        }
+
+        /* Cores específicas por fase */
+        .vegetative .stage-icon { background: linear-gradient(135deg, #27ae60, #229954); }
+        .flowering .stage-icon { background: linear-gradient(135deg, #f39c12, #e67e22); }
+        .podding .stage-icon { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        .grain .stage-icon { background: linear-gradient(135deg, #8e44ad, #6c3483); }
+        .maturity .stage-icon { background: linear-gradient(135deg, #3498db, #2980b9); }
+
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .nav-button:hover {
+            background: #2c3e50;
+            color: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .nav-button.prev { left: 0; }
+        .nav-button.next { right: 0; }
+
+        .info-panel {
+            margin-top: 50px;
+            max-width: 900px;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .info-panel.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .info-panel h2 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .info-section {
+            margin-bottom: 25px;
+        }
+
+        .info-section h3 {
+            font-size: 1.1rem;
+            color: #34495e;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .info-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-section li {
+            padding: 8px 0 8px 25px;
+            position: relative;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .info-section li:before {
+            content: "•";
+            position: absolute;
+            left: 10px;
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 { font-size: 1.6rem; }
+            .stage-card { min-width: 180px; padding: 20px 15px; }
+            .stage-icon { width: 60px; height: 60px; font-size: 2rem; }
+            .nav-button { width: 40px; height: 40px; font-size: 1.2rem; }
+            .logo-space { 
+                flex-direction: column; 
+                gap: 15px; 
+            }
+            .qr-code, .company-logo { 
+                width: 70px; 
+                height: 70px; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo-space">
+            <!-- QR Code à esquerda -->
+            <div class="qr-code">
+                <img src="qrcode.png" alt="QR Code">
+            </div>
+            
+            <!-- Informações centrais -->
+            <div class="author-section">
+                <div class="author-info">Raudinei Afonso</div>
+                <div class="author-phone">63 98437-6572</div>
+            </div>
+            
+            <!-- Logo da empresa à direita -->
+            <div class="company-logo">
+                <img src="logo.png" alt="Logo">
+            </div>
+        </div>
+        
+        <h1>Calendário Estimado de Estádios Fenológicos – Soja</h1>
+        <p>Ciclo de 115 dias após o plantio</p>
+    </div>
+
+    <div class="carousel-container">
+        <button class="nav-button prev" onclick="scroll(-1)">‹</button>
+        <button class="nav-button next" onclick="scroll(1)">›</button>
+        
+        <div class="carousel-track" id="track">
+            <!-- Cards serão gerados dinamicamente -->
+        </div>
+    </div>
+
+    <div class="info-panel" id="infoPanel">
+        <h2 id="infoTitle">Selecione um estádio</h2>
+        <div id="infoContent"></div>
+    </div>
+
+    <script>
+        const stages = [
+            {
+                name: 'VE',
+                fullName: 'Emergência',
+                description: 'Plântula rompe o solo',
+                day: 0,
+                phase: 'vegetative',
+                icon: '🌱',
+                info: {
+                    diseases: ['Tombamento de plântulas', 'Podridões de raiz e colo', 'Patógenos transmitidos via semente'],
+                    pests: ['Corós', 'Larvas de Diabrotica', 'Lesmas e caracóis', 'Cupins'],
+                    nutrients: 'Fase inicial - foco em qualidade da semente'
+                }
+            },
+            {
+                name: 'VC',
+                fullName: 'Cotilédones',
+                description: 'Cotilédones abertos',
+                day: 3,
+                phase: 'vegetative',
+                icon: '🌱',
+                info: {
+                    diseases: ['Proteção inicial contra tombamento'],
+                    pests: ['Monitoramento preventivo de solo'],
+                    nutrients: 'Início da absorção radicular'
+                }
+            },
+            {
+                name: 'V1',
+                fullName: '1ª Folha',
+                description: '1ª folha trifoliolada',
+                day: 8,
+                phase: 'vegetative',
+                icon: '🌿',
+                info: {
+                    diseases: ['Fase inicial de desenvolvimento'],
+                    pests: ['Monitoramento preventivo'],
+                    nutrients: 'Crescimento vegetativo inicial'
+                }
+            },
+            {
+                name: 'V2',
+                fullName: '2ª Folha',
+                description: '2ª folha trifoliolada',
+                day: 16,
+                phase: 'vegetative',
+                icon: '🌿',
+                info: {
+                    diseases: ['Crestamento Bacteriano (5,0%)'],
+                    pests: ['Tripes começam a aparecer'],
+                    nutrients: 'Absorção ainda moderada'
+                }
+            },
+            {
+                name: 'V4',
+                fullName: '4ª Folha',
+                description: '4ª folha trifoliolada',
+                day: 20,
+                phase: 'vegetative',
+                icon: '🍃',
+                info: {
+                    diseases: ['Míldio (15,0%)', 'Crestamento Bacteriano (12,0%)', 'Pústula Bacteriana (4,0%)'],
+                    pests: ['Aumento de tripes e lagartas'],
+                    nutrients: 'CRÍTICO: Primeira explosão de demanda (N:9%, P:13%, Ca:16%, Mg:15%)'
+                }
+            },
+            {
+                name: 'R1',
+                fullName: 'Início do Florescimento',
+                description: 'Início do florescimento contínuo (1 flor visível)',
+                day: 25,
+                phase: 'flowering',
+                icon: '🌼',
+                info: {
+                    diseases: ['Míldio (25,0% - PICO)', 'Crestamento Bacteriano (15,0%)', 'Oídio (20,25%)'],
+                    pests: ['Tripes (56/m²)', 'Lagartas (15,2/m²)', 'Mosca-branca (32/m² - PICO)'],
+                    nutrients: 'CRÍTICO: 50-60% dos nutrientes já absorvidos (Ca:62%, Fe:57%, N:54%, B:47%)'
+                }
+            },
+            {
+                name: 'R2',
+                fullName: 'Flor Aberta',
+                description: 'Flor aberta no terço superior da planta',
+                day: 62,
+                phase: 'flowering',
+                icon: '🌺',
+                info: {
+                    diseases: ['Míldio (20,0%)', 'Pústula Bacteriana (15,0%)', 'Mofo Branco (12,0%)'],
+                    pests: ['Tripes (43/m²)', 'Lagartas (25,8/m²)', 'Percevejos (0,46/m²)'],
+                    nutrients: 'Monitoramento intensivo - risco de Fe, K, Mg'
+                }
+            },
+            {
+                name: 'R4',
+                fullName: 'Vagem de 5mm',
+                description: 'Vagem de 5mm em um dos 4 primeiros nós',
+                day: 72,
+                phase: 'podding',
+                icon: '🫛',
+                info: {
+                    diseases: ['Ferrugem Asiática (65,0%)', 'Mofo Branco (45,0%)', 'Mancha Parda (8,0%)'],
+                    pests: ['LAGARTAS (49,86/m² - PICO ABSOLUTO!)', 'Percevejos (8,5/m²)', '⚠️ 95% do consumo foliar ocorre aqui'],
+                    nutrients: 'Última chance para correções foliares - Cu e Ni críticos'
+                }
+            },
+            {
+                name: 'R5.1',
+                fullName: 'Enchimento de Grãos',
+                description: 'Início do enchimento de grãos',
+                day: 95,
+                phase: 'grain',
+                icon: '🫛',
+                info: {
+                    diseases: ['Ferrugem Asiática (85,0%)', 'Oídio (73,75%)', 'Mancha Parda (20,0%)'],
+                    pests: ['Lagartas (42,3/m²)', 'Percevejos (12,7/m² - crescimento rápido)'],
+                    nutrients: 'CRÍTICO: 90-99% absorvido (Fe:99%, B:94%, Ca:99%)'
+                }
+            },
+            {
+                name: 'R6',
+                fullName: 'Grãos Formados',
+                description: 'Grãos totalmente formados',
+                day: 95,
+                phase: 'grain',
+                icon: '🫛',
+                info: {
+                    diseases: ['Ferrugem Asiática (95,0% - PICO)', 'Mancha Parda (45,0%)', 'Cercospora (55,0%)'],
+                    pests: ['Lagartas (28,7/m²)', 'Percevejos (16,2/m² - ascensão forte)'],
+                    nutrients: 'Fim da absorção radicular - apenas redistribuição interna'
+                }
+            },
+            {
+                name: 'R8',
+                fullName: 'Maturação',
+                description: 'Maturação plena (95% das vagens maduras)',
+                day: 110,
+                phase: 'maturity',
+                icon: '🟤',
+                info: {
+                    diseases: ['Macrophomina (85,0%)', 'Mancha Parda (85,0%)', 'Oídio (98,75% - PICO)'],
+                    pests: ['Percevejos (12,1/m²)', 'Todas as pragas em declínio natural'],
+                    nutrients: 'Translocação de nutrientes para grãos - acompanhamento apenas'
+                }
+            },
+            {
+                name: 'R9',
+                fullName: 'Colheita',
+                description: 'Ponto de colheita',
+                day: 115,
+                phase: 'maturity',
+                icon: '🚜',
+                info: {
+                    diseases: ['Macrophomina em resíduos', 'Cercospora em folhas secas', 'Mancha Parda em resíduos', 'Fusarium e Phomopsis nas matérias secas', 'Aspergillus e Penicillium em grãos armazenados'],
+                    pests: ['Percevejos remanescentes', 'Larvas de Sitophilus e Zabrotes em armazenamento', 'Tribolium e coleópteros de armazenamento'],
+                    nutrients: 'Importância do manejo: regulagem da colheitadeira, enterrar resíduos, rotação de culturas, limpeza de máquinas, armazenamento correto'
+                }
+            }
+        ];
+
+        const track = document.getElementById('track');
+        const infoPanel = document.getElementById('infoPanel');
+        const infoTitle = document.getElementById('infoTitle');
+        const infoContent = document.getElementById('infoContent');
+
+        // Gerar cards
+        stages.forEach((stage, index) => {
+            const card = document.createElement('div');
+            card.className = `stage-card ${stage.phase}`;
+            card.innerHTML = `
+                <div class="stage-icon">${stage.icon}</div>
+                <div class="stage-name">${stage.name}</div>
+                <div class="stage-description">${stage.description}</div>
+                <div class="stage-day">Dia ${stage.day}</div>
+            `;
+            card.onclick = () => selectStage(index);
+            track.appendChild(card);
+        });
+
+        let currentIndex = 0;
+
+        function selectStage(index) {
+            currentIndex = index;
+            const cards = document.querySelectorAll('.stage-card');
+            cards.forEach(c => c.classList.remove('active'));
+            cards[index].classList.add('active');
+
+            const stage = stages[index];
+            infoTitle.textContent = `${stage.name} - ${stage.fullName} (Dia ${stage.day})`;
+            
+            let content = `
+                <div class="info-section">
+                    <h3>🦠 Doenças Principais</h3>
+                    <ul>${stage.info.diseases.map(d => `<li>${d}</li>`).join('')}</ul>
+                </div>
+                <div class="info-section">
+                    <h3>🐛 Pragas</h3>
+                    <ul>${stage.info.pests.map(p => `<li>${p}</li>`).join('')}</ul>
+                </div>
+                <div class="info-section">
+                    <h3>🌱 Nutrição</h3>
+                    <ul><li>${stage.info.nutrients}</li></ul>
+                </div>
+            `;
+            
+            infoContent.innerHTML = content;
+            infoPanel.classList.add('visible');
+
+            // Scroll suave até o card
+            cards[index].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+
+        function scroll(direction) {
+            const newIndex = currentIndex + direction;
+            if (newIndex >= 0 && newIndex < stages.length) {
+                selectStage(newIndex);
+            }
+        }
+
+        // Selecionar primeiro card ao carregar
+        selectStage(0);
+    </script>
+</body>
+</html>
