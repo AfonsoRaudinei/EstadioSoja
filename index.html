@@ -149,8 +149,14 @@
             transition: all 0.3s ease;
         }
 
-        .stage-card.active .stage-icon {
-            transform: scale(1.1);
+       .stage-card.active {
+    transform: translateY(-18px) scale(1.18);
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.25),
+        0 0 0 4px rgba(47, 128, 237, 0.18);
+    z-index: 20;
+    background: white;
+}
         }
 
         .stage-name {
