@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -28,30 +29,54 @@
         }
 
         .logo-space {
-            height: 120px;
-            margin-bottom: 15px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .qr-code {
+            width: 100px;
+            height: 100px;
+            flex-shrink: 0;
+        }
+
+        .qr-code img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .author-section {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .logo-space img {
-            max-height: 80px;
-            width: auto;
+            gap: 5px;
         }
 
         .author-info {
-            font-size: 0.95rem;
+            font-size: 1.1rem;
             color: #34495e;
-            font-weight: 500;
+            font-weight: 600;
         }
 
         .author-phone {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: #7f8c8d;
             font-weight: 400;
+        }
+
+        .company-logo {
+            width: 80px;
+            height: 80px;
+            flex-shrink: 0;
+        }
+
+        .company-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         .header h1 {
@@ -248,17 +273,37 @@
             .stage-card { min-width: 180px; padding: 20px 15px; }
             .stage-icon { width: 60px; height: 60px; font-size: 2rem; }
             .nav-button { width: 40px; height: 40px; font-size: 1.2rem; }
+            .logo-space { 
+                flex-direction: column; 
+                gap: 15px; 
+            }
+            .qr-code, .company-logo { 
+                width: 70px; 
+                height: 70px; 
+            }
         }
     </style>
 </head>
 <body>
     <div class="header">
         <div class="logo-space">
-            <!-- Descomente e adicione o caminho do logo PNG -->
-            <!-- <img src="logo.png" alt="Logo"> -->
-            <div class="author-info">Raudinei Afonso</div>
-            <div class="author-phone">63 98437-6572</div>
+            <!-- QR Code à esquerda -->
+            <div class="qr-code">
+                <img src="qrcode.png" alt="QR Code">
+            </div>
+            
+            <!-- Informações centrais -->
+            <div class="author-section">
+                <div class="author-info">Raudinei Afonso</div>
+                <div class="author-phone">63 98437-6572</div>
+            </div>
+            
+            <!-- Logo da empresa à direita -->
+            <div class="company-logo">
+                <img src="logo.png" alt="Logo">
+            </div>
         </div>
+        
         <h1>Calendário Estimado de Estádios Fenológicos – Soja</h1>
         <p>Ciclo de 115 dias após o plantio</p>
     </div>
