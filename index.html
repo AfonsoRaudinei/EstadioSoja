@@ -13,18 +13,34 @@
 
         body {
             font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e8edf2 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #e8edf2 50%, #f5f7fa 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 40px 20px;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.8) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(240, 245, 250, 0.6) 0%, transparent 50%);
+            pointer-events: none;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
             max-width: 800px;
+            position: relative;
+            z-index: 1;
         }
 
         .logo-space {
@@ -56,13 +72,13 @@
 
         .author-info {
             font-size: 1.1rem;
-            color: #34495e;
+            color: #2c3e50;
             font-weight: 600;
         }
 
         .author-phone {
             font-size: 0.9rem;
-            color: #7f8c8d;
+            color: #5a6c7d;
             font-weight: 400;
         }
 
@@ -79,32 +95,35 @@
         }
 
         .header h1 {
-            font-size: 2.2rem;
-            font-weight: 600;
+            font-size: 2.5rem;
+            font-weight: 700;
             color: #2c3e50;
             margin-bottom: 10px;
             letter-spacing: -0.5px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .header p {
-            font-size: 1rem;
-            color: #7f8c8d;
+            font-size: 1.1rem;
+            color: #5a6c7d;
             font-weight: 400;
         }
 
         .carousel-container {
             width: 100%;
-            max-width: 1200px;
+            max-width: 900px;
             position: relative;
-            padding: 20px 0;
+            padding: 80px 0 60px;
+            overflow: hidden;
+            z-index: 1;
         }
 
         .carousel-track {
             display: flex;
-            gap: 20px;
+            gap: 30px;
             overflow-x: auto;
             scroll-behavior: smooth;
-            padding: 20px 40px;
+            padding: 50px 60px;
             scrollbar-width: none;
             -ms-overflow-style: none;
         }
@@ -114,80 +133,173 @@
         }
 
         .stage-card {
-            min-width: 220px;
-            background: white;
-            border-radius: 20px;
-            padding: 30px 20px;
+            min-width: 240px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 40px 30px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.06),
+                0 2px 8px rgba(0, 0, 0, 0.03);
             position: relative;
             flex-shrink: 0;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .stage-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 24px;
+            padding: 2px;
+            background: linear-gradient(135deg, transparent, transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
 
         .stage-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
         }
 
         .stage-card.active {
-            transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            z-index: 10;
+            transform: translateY(-25px) scale(1.12);
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.25),
+                0 0 0 4px rgba(255, 255, 255, 0.5);
+            background: white;
+            border-color: rgba(52, 73, 94, 0.3);
+        }
+
+        .stage-card.active::before {
+            opacity: 1;
+            background: linear-gradient(135deg, #95a5a6, #34495e);
         }
 
         .stage-icon {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
-            margin: 0 auto 20px;
+            margin: 0 auto 25px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.5rem;
-            transition: all 0.3s ease;
+            font-size: 3rem;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 3px solid #e0e0e0;
+            background: #fafafa;
+            position: relative;
         }
 
-       .stage-card.active {
-    transform: translateY(-18px) scale(1.18);
-    box-shadow:
-        0 20px 40px rgba(0, 0, 0, 0.25),
-        0 0 0 4px rgba(47, 128, 237, 0.18);
-    z-index: 20;
-    background: white;
-}
+        .stage-card.active .stage-icon {
+            transform: scale(1.15) rotate(360deg);
+            border-width: 4px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         }
 
-        .stage-name {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: #2c3e50;
+        .stage-icon::after {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, transparent, transparent);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
 
-        .stage-description {
-            font-size: 0.85rem;
-            color: #7f8c8d;
-            line-height: 1.4;
-            margin-bottom: 12px;
-        }
-
-        .stage-day {
-            font-size: 0.9rem;
-            color: #95a5a6;
-            font-weight: 600;
-            margin-top: 10px;
-            padding-top: 10px;
-            border-top: 1px solid #ecf0f1;
+        .stage-card.active .stage-icon::after {
+            opacity: 1;
         }
 
         /* Cores específicas por fase */
-        .vegetative .stage-icon { background: linear-gradient(135deg, #27ae60, #229954); }
-        .flowering .stage-icon { background: linear-gradient(135deg, #f39c12, #e67e22); }
-        .podding .stage-icon { background: linear-gradient(135deg, #e74c3c, #c0392b); }
-        .grain .stage-icon { background: linear-gradient(135deg, #8e44ad, #6c3483); }
-        .maturity .stage-icon { background: linear-gradient(135deg, #3498db, #2980b9); }
+        .vegetative .stage-icon { 
+            border-color: #27ae60;
+            background: rgba(39, 174, 96, 0.05);
+        }
+        .vegetative.active .stage-icon::after { 
+            background: linear-gradient(135deg, #27ae60, #229954);
+        }
+
+        .flowering .stage-icon { 
+            border-color: #f39c12;
+            background: rgba(243, 156, 18, 0.05);
+        }
+        .flowering.active .stage-icon::after { 
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+        }
+
+        .podding .stage-icon { 
+            border-color: #e74c3c;
+            background: rgba(231, 76, 60, 0.05);
+        }
+        .podding.active .stage-icon::after { 
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+
+        .grain .stage-icon { 
+            border-color: #8e44ad;
+            background: rgba(142, 68, 173, 0.05);
+        }
+        .grain.active .stage-icon::after { 
+            background: linear-gradient(135deg, #8e44ad, #6c3483);
+        }
+
+        .maturity .stage-icon { 
+            border-color: #3498db;
+            background: rgba(52, 152, 219, 0.05);
+        }
+        .maturity.active .stage-icon::after { 
+            background: linear-gradient(135deg, #3498db, #2980b9);
+        }
+
+        .stage-name {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+        }
+
+        .stage-card.active .stage-name {
+            color: #34495e;
+            font-size: 2rem;
+        }
+
+        .stage-description {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .stage-card.active .stage-description {
+            color: #34495e;
+            font-weight: 500;
+        }
+
+        .stage-day {
+            font-size: 0.95rem;
+            color: #95a5a6;
+            font-weight: 700;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #ecf0f1;
+            transition: all 0.3s ease;
+        }
+
+        .stage-card.active .stage-day {
+            color: #34495e;
+            border-top-color: #34495e;
+            font-size: 1.05rem;
+        }
 
         .nav-button {
             position: absolute;
@@ -195,39 +307,43 @@
             transform: translateY(-50%);
             background: white;
             border: none;
-            width: 50px;
-            height: 50px;
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            color: #2c3e50;
+            font-size: 1.8rem;
+            color: #34495e;
             transition: all 0.3s ease;
             z-index: 100;
         }
 
         .nav-button:hover {
-            background: #2c3e50;
+            background: #34495e;
             color: white;
             transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 12px 32px rgba(52, 73, 94, 0.4);
         }
 
-        .nav-button.prev { left: 0; }
-        .nav-button.next { right: 0; }
+        .nav-button.prev { left: 10px; }
+        .nav-button.next { right: 10px; }
 
         .info-panel {
-            margin-top: 50px;
-            max-width: 900px;
+            margin-top: 60px;
+            max-width: 1000px;
             background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
             opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s ease;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            z-index: 1;
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .info-panel.visible {
@@ -236,21 +352,106 @@
         }
 
         .info-panel h2 {
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: #2c3e50;
-            margin-bottom: 20px;
-            font-weight: 600;
+            margin-bottom: 30px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #95a5a6, #34495e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .info-section {
-            margin-bottom: 25px;
+            margin-bottom: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, #fafbfc 0%, #f5f7fa 100%);
+            border-radius: 20px;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(180deg, #34495e 0%, #95a5a6 100%);
+            transition: all 0.3s ease;
+        }
+
+        .info-section:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .info-section:hover::before {
+            width: 8px;
         }
 
         .info-section h3 {
-            font-size: 1.1rem;
-            color: #34495e;
-            margin-bottom: 10px;
-            font-weight: 600;
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .info-section h3::before {
+            font-size: 1.8rem;
+            display: inline-block;
+        }
+
+        .info-section:nth-child(1) h3::before {
+            content: '🦠';
+            animation: iconPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes iconPulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.15);
+            }
+        }
+
+        .info-section:nth-child(2) h3::before {
+            content: '🐛';
+            animation: iconWiggle 3s ease-in-out infinite;
+        }
+
+        @keyframes iconWiggle {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            25% {
+                transform: rotate(-10deg);
+            }
+            75% {
+                transform: rotate(10deg);
+            }
+        }
+
+        .info-section:nth-child(3) h3::before {
+            content: '🌱';
+            animation: iconGrow 2.5s ease-in-out infinite;
+        }
+
+        @keyframes iconGrow {
+            0%, 100% {
+                transform: scale(1) translateY(0);
+            }
+            50% {
+                transform: scale(1.2) translateY(-3px);
+            }
         }
 
         .info-section ul {
@@ -259,25 +460,37 @@
         }
 
         .info-section li {
-            padding: 8px 0 8px 25px;
+            padding: 10px 0 10px 30px;
             position: relative;
             color: #555;
-            line-height: 1.6;
+            line-height: 1.7;
+            font-size: 0.95rem;
         }
 
         .info-section li:before {
-            content: "•";
+            content: "→";
             position: absolute;
             left: 10px;
-            color: #3498db;
+            color: #34495e;
             font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .stage-card.active .stage-icon {
+            animation: float 3s ease-in-out infinite;
         }
 
         @media (max-width: 768px) {
-            .header h1 { font-size: 1.6rem; }
-            .stage-card { min-width: 180px; padding: 20px 15px; }
-            .stage-icon { width: 60px; height: 60px; font-size: 2rem; }
-            .nav-button { width: 40px; height: 40px; font-size: 1.2rem; }
+            .header h1 { font-size: 1.8rem; }
+            .stage-card { min-width: 170px; padding: 30px 20px; }
+            .stage-icon { width: 80px; height: 80px; font-size: 2.5rem; }
+            .nav-button { width: 45px; height: 45px; font-size: 1.4rem; }
+            .info-panel { padding: 35px; }
             .logo-space { 
                 flex-direction: column; 
                 gap: 15px; 
@@ -339,7 +552,7 @@
                 info: {
                     diseases: ['Tombamento de plântulas', 'Podridões de raiz e colo', 'Patógenos transmitidos via semente'],
                     pests: ['Corós', 'Larvas de Diabrotica', 'Lesmas e caracóis', 'Cupins'],
-                    nutrients: 'Fase inicial - foco em qualidade da semente'
+                    nutrients: 'Início - Absorção praticamente zero. Planta depende das reservas da semente.'
                 }
             },
             {
@@ -352,7 +565,7 @@
                 info: {
                     diseases: ['Proteção inicial contra tombamento'],
                     pests: ['Monitoramento preventivo de solo'],
-                    nutrients: 'Início da absorção radicular'
+                    nutrients: 'Absorção inicial: N(1-2%), P(2-3%), K(1-2%), Ca(2-3%). Sistema radicular em formação.'
                 }
             },
             {
@@ -365,7 +578,7 @@
                 info: {
                     diseases: ['Fase inicial de desenvolvimento'],
                     pests: ['Monitoramento preventivo'],
-                    nutrients: 'Crescimento vegetativo inicial'
+                    nutrients: 'Baixa absorção: N(2-3%), P(3-4%), K(2-3%), Ca(3-4%). Fase vegetativa inicial.'
                 }
             },
             {
@@ -378,7 +591,7 @@
                 info: {
                     diseases: ['Crestamento Bacteriano (5,0%)'],
                     pests: ['Tripes começam a aparecer'],
-                    nutrients: 'Absorção ainda moderada'
+                    nutrients: 'Absorção moderada: N(3-5%), P(4-6%), K(3-5%), Ca(4-6%), Mg(4-5%). Início do crescimento acelerado.'
                 }
             },
             {
@@ -391,7 +604,7 @@
                 info: {
                     diseases: ['Míldio (15,0%)', 'Crestamento Bacteriano (12,0%)', 'Pústula Bacteriana (4,0%)'],
                     pests: ['Aumento de tripes e lagartas'],
-                    nutrients: 'CRÍTICO: Primeira explosão de demanda (N:9%, P:13%, Ca:16%, Mg:15%)'
+                    nutrients: '⚠️ CRÍTICO - Primeira explosão de demanda! N(8-9%), P(11-13%), K(9-11%), Ca(14-16%), Mg(13-15%), Fe(12-15%), B(10-13%). Planta "acorda" e multiplica demanda por 4x!'
                 }
             },
             {
@@ -403,8 +616,8 @@
                 icon: '🌼',
                 info: {
                     diseases: ['Míldio (25,0% - PICO)', 'Crestamento Bacteriano (15,0%)', 'Oídio (20,25%)'],
-                    pests: ['Tripes (56/m²)', 'Lagartas (15,2/m²)', 'Mosca-branca (32/m² - PICO)'],
-                    nutrients: 'CRÍTICO: 50-60% dos nutrientes já absorvidos (Ca:62%, Fe:57%, N:54%, B:47%)'
+                    pests: ['Tripes', 'Lagartas', 'Mosca-branca (PICO)'],
+                    nutrients: '🚨 CRÍTICO - METADE JÁ ABSORVIDA! N(53-54%), P(48-52%), K(50-53%), Ca(59-62% - PICO!), Mg(56-59%), Fe(55-57%), B(45-47%). Janela de correção se fechando rapidamente!'
                 }
             },
             {
@@ -416,8 +629,8 @@
                 icon: '🌺',
                 info: {
                     diseases: ['Míldio (20,0%)', 'Pústula Bacteriana (15,0%)', 'Mofo Branco (12,0%)'],
-                    pests: ['Tripes (43/m²)', 'Lagartas (25,8/m²)', 'Percevejos (0,46/m²)'],
-                    nutrients: 'Monitoramento intensivo - risco de Fe, K, Mg'
+                    pests: ['Tripes', 'Lagartas', 'Percevejos'],
+                    nutrients: 'Alta absorção: N(63-67%), P(60-65%), K(63-68%), Ca(70-75%), Mg(68-72%), Fe(65-70%). Monitoramento intensivo - correções foliares de alta eficiência ainda possíveis.'
                 }
             },
             {
@@ -429,8 +642,8 @@
                 icon: '🫛',
                 info: {
                     diseases: ['Ferrugem Asiática (65,0%)', 'Mofo Branco (45,0%)', 'Mancha Parda (8,0%)'],
-                    pests: ['LAGARTAS (49,86/m² - PICO ABSOLUTO!)', 'Percevejos (8,5/m²)', '⚠️ 95% do consumo foliar ocorre aqui'],
-                    nutrients: 'Última chance para correções foliares - Cu e Ni críticos'
+                    pests: ['LAGARTAS (PICO ABSOLUTO!)', 'Percevejos', '⚠️ 95% do consumo foliar ocorre aqui'],
+                    nutrients: '⚠️ ÚLTIMA CHANCE! N(80-85%), P(78-82%), K(82-85%), Ca(84-87%), Mg(82-85%), Fe(85-88%), Cu(86-89%), Ni(76-78%). Apenas correções foliares emergenciais de altíssima eficiência!'
                 }
             },
             {
@@ -442,8 +655,8 @@
                 icon: '🫛',
                 info: {
                     diseases: ['Ferrugem Asiática (85,0%)', 'Oídio (73,75%)', 'Mancha Parda (20,0%)'],
-                    pests: ['Lagartas (42,3/m²)', 'Percevejos (12,7/m² - crescimento rápido)'],
-                    nutrients: 'CRÍTICO: 90-99% absorvido (Fe:99%, B:94%, Ca:99%)'
+                    pests: ['Lagartas', 'Percevejos (crescimento rápido)'],
+                    nutrients: '🚨 TERMINAL - 90-99% JÁ ABSORVIDO! N(95-97%), P(94-97%), K(95-98%), Ca(97-99%), Mg(96-98%), Fe(97-99% - MÁXIMO!), B(92-94%), Zn(95-97%). Absorção radicular praticamente cessou - apenas redistribuição interna!'
                 }
             },
             {
@@ -455,8 +668,8 @@
                 icon: '🫛',
                 info: {
                     diseases: ['Ferrugem Asiática (95,0% - PICO)', 'Mancha Parda (45,0%)', 'Cercospora (55,0%)'],
-                    pests: ['Lagartas (28,7/m²)', 'Percevejos (16,2/m² - ascensão forte)'],
-                    nutrients: 'Fim da absorção radicular - apenas redistribuição interna'
+                    pests: ['Lagartas', 'Percevejos (ascensão forte)'],
+                    nutrients: '⛔ FIM DA ABSORÇÃO RADICULAR - 100% absorvido para todos os nutrientes. Sistema radicular em senescência. Apenas translocação de nutrientes da parte aérea para os grãos. Qualquer deficiência agora é IRREVERSÍVEL!'
                 }
             },
             {
@@ -468,8 +681,8 @@
                 icon: '🟤',
                 info: {
                     diseases: ['Macrophomina (85,0%)', 'Mancha Parda (85,0%)', 'Oídio (98,75% - PICO)'],
-                    pests: ['Percevejos (12,1/m²)', 'Todas as pragas em declínio natural'],
-                    nutrients: 'Translocação de nutrientes para grãos - acompanhamento apenas'
+                    pests: ['Percevejos', 'Todas as pragas em declínio natural'],
+                    nutrients: 'Translocação completa de nutrientes para os grãos. Folhas e caules em senescência devolvem nutrientes ao solo. Reciclagem: 60-85% dos nutrientes ficam na palhada (varia por elemento). Momento de planejar próxima safra!'
                 }
             },
             {
@@ -482,7 +695,7 @@
                 info: {
                     diseases: ['Macrophomina em resíduos', 'Cercospora em folhas secas', 'Mancha Parda em resíduos', 'Fusarium e Phomopsis nas matérias secas', 'Aspergillus e Penicillium em grãos armazenados'],
                     pests: ['Percevejos remanescentes', 'Larvas de Sitophilus e Zabrotes em armazenamento', 'Tribolium e coleópteros de armazenamento'],
-                    nutrients: 'Importância do manejo: regulagem da colheitadeira, enterrar resíduos, rotação de culturas, limpeza de máquinas, armazenamento correto'
+                    nutrients: '📊 BALANÇO NUTRICIONAL: Exportação nos grãos (kg/ton) - N:38-64, P:30-32, K:15-19, Ca:2-6, Mg:13-18. Palhada recicla: 40-90% dos nutrientes extraídos! CRÍTICO: Incorporar resíduos, fazer rotação, repor nutrientes exportados para próxima safra.'
                 }
             }
         ];
@@ -519,15 +732,15 @@
             
             let content = `
                 <div class="info-section">
-                    <h3>🦠 Doenças Principais</h3>
+                    <h3>Doenças Principais</h3>
                     <ul>${stage.info.diseases.map(d => `<li>${d}</li>`).join('')}</ul>
                 </div>
                 <div class="info-section">
-                    <h3>🐛 Pragas</h3>
+                    <h3>Pragas</h3>
                     <ul>${stage.info.pests.map(p => `<li>${p}</li>`).join('')}</ul>
                 </div>
                 <div class="info-section">
-                    <h3>🌱 Nutrição</h3>
+                    <h3>Nutrição</h3>
                     <ul><li>${stage.info.nutrients}</li></ul>
                 </div>
             `;
