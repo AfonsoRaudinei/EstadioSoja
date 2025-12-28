@@ -1,4 +1,68 @@
-<!DOCTYPE html>
+
+                        <!DOCTYPE html>
+                        <html lang="en">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <style>
+                body {
+                  background-color: white; /* Ensure the iframe has a white background */
+                }
+
+                .stage-card {
+    min-width: 260px; /* aumentado de 220px */
+    background: white;
+    border-radius: 20px;
+    padding: 30px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    position: relative;
+    flex-shrink: 0;
+    filter: grayscale(100%);
+    opacity: 0.6;
+}
+
+.stage-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+    opacity: 0.8;
+}
+
+.stage-card.active {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+.stage-icon {
+    width: 120px;   /* ← AUMENTADO */
+    height: 120px;  /* ← AUMENTADO */
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    background: #f8f9fa;
+}
+
+.stage-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* preserva proporção e mostra todos os detalhes */
+    pointer-events: none;
+}
+
+
+              </style>
+                        </head>
+                        <body>
+                            <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8" />
@@ -47,25 +111,48 @@
         .carousel-track::-webkit-scrollbar { display: none; }
 
         .stage-card {
-            min-width: 220px; background: white; border-radius: 20px; padding: 30px 20px;
-            text-align: center; cursor: pointer; transition: all 0.4s;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08); filter: grayscale(100%); opacity: 0.6;
+            min-width: 260px; /* aumentado */
+            background: white;
+            border-radius: 20px;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            position: relative;
+            flex-shrink: 0;
+            filter: grayscale(100%);
+            opacity: 0.6;
         }
-        .stage-card:hover { transform: translateY(-5px); box-shadow: 0 12px 24px rgba(0,0,0,0.12); opacity: 0.8; }
+        .stage-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+            opacity: 0.8;
+        }
         .stage-card.active {
-            transform: translateY(-10px) scale(1.05); box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            filter: grayscale(0%); opacity: 1; z-index: 10;
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            z-index: 10;
+            filter: grayscale(0%);
+            opacity: 1;
         }
 
         .stage-icon {
-            width: 80px; height: 80px; margin: 0 auto 20px;
-            display: flex; align-items: center; justify-content: center;
-            border-radius: 12px; overflow: hidden;
+            width: 120px;   /* ← AUMENTADO */
+            height: 120px;  /* ← AUMENTADO */
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            overflow: hidden;
             box-shadow: 0 2px 6px rgba(0,0,0,0.1);
             background: #f8f9fa;
         }
         .stage-icon img {
-            width: 100%; height: 100%; object-fit: contain;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
             pointer-events: none;
         }
 
@@ -118,8 +205,8 @@
 
         @media (max-width: 768px) {
             .header h1 { font-size: 1.6rem; }
-            .stage-card { min-width: 180px; padding: 20px 15px; }
-            .stage-icon { width: 60px; height: 60px; }
+            .stage-card { min-width: 200px; padding: 20px 15px; }
+            .stage-icon { width: 100px; height: 100px; } /* ajuste para mobile */
             .nav-button { width: 40px; height: 40px; font-size: 1.2rem; }
             .logo-space { flex-direction: column; gap: 15px; }
             .qr-code, .company-logo { width: 70px; height: 70px; }
@@ -234,7 +321,15 @@
                 }
             },
             {
-                name: 'R8', fullName: 'Maturação', description: 'Maturação plena (95% das vagens maduras)', day: 110, phase: 'maturity', image: 'imagens/soja_r8.jpg',
+                name: 'R7', fullName: 'Início da Maturação', description: 'Primeira vagem madura (marrom/amarela)', day: 105, phase: 'maturity', image: 'imagens/soja_r7.jpg',
+                info: {
+                    diseases: ['Macrophomina (75,0%)', 'Mancha Parda (70,0%)', 'Cercospora (60,0%)'],
+                    pests: ['Percevejos (10,5/m²)', 'Declínio geral de pragas foliares'],
+                    nutrients: 'Translocação final - foco em qualidade dos grãos'
+                }
+            },
+            {
+                name: 'R8', fullName: 'Maturação Plena', description: '95% das vagens maduras', day: 110, phase: 'maturity', image: 'imagens/soja_r8.jpg',
                 info: {
                     diseases: ['Macrophomina (85,0%)', 'Mancha Parda (85,0%)', 'Oídio (98,75% - PICO)'],
                     pests: ['Percevejos (12,1/m²)', 'Todas as pragas em declínio natural'],
@@ -261,7 +356,7 @@
             card.className = `stage-card ${stage.phase}`;
             card.innerHTML = `
                 <div class="stage-icon">
-                    <img src="${stage.image}" alt="${stage.name}" loading="lazy" onerror="this.src='image/svg+xml;charset=utf-8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2280%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23ccc%22 stroke-width=%222%22><path d=%22M12 2 C8 2 5 5 5 9 L5 15 C5 19 8 22 12 22 C16 22 19 19 19 15 L19 9 C19 5 16 2 12 2 Z%22/><circle cx=%2212%22 cy=%2212%22 r=%223%22 fill=%22%23eee%22/></svg>'">
+                    <img src="${stage.image}" alt="${stage.name}" loading="lazy" onerror="this.src='image/svg+xml;charset=utf-8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23ccc%22 stroke-width=%222%22><path d=%22M12 2 C8 2 5 5 5 9 L5 15 C5 19 8 22 12 22 C16 22 19 19 19 15 L19 9 C19 5 16 2 12 2 Z%22/><circle cx=%2212%22 cy=%2212%22 r=%223%22 fill=%22%23eee%22/></svg>'">
                 </div>
                 <div class="stage-name">${stage.name}</div>
                 <div class="stage-description">${stage.description}</div>
@@ -311,3 +406,77 @@
 </body>
 </html>
 
+
+
+              <script>
+                              {
+    name: 'R5.1',
+    fullName: 'Enchimento de Grãos',
+    description: 'Início do enchimento de grãos',
+    day: 85,
+    phase: 'grain',
+    image: 'imagens/soja_r51.jpg',
+    info: {
+        diseases: ['Ferrugem Asiática (85,0%)', 'Oídio (73,75%)', 'Mancha Parda (20,0%)'],
+        pests: ['Lagartas (42,3/m²)', 'Percevejos (12,7/m² - crescimento rápido)'],
+        nutrients: 'CRÍTICO: 90-99% absorvido (Fe:99%, B:94%, Ca:99%)'
+    }
+},
+{
+    name: 'R6',
+    fullName: 'Grãos Formados',
+    description: 'Grãos totalmente formados',
+    day: 95,
+    phase: 'grain',
+    image: 'imagens/soja_r6.jpg',
+    info: {
+        diseases: ['Ferrugem Asiática (95,0% - PICO)', 'Mancha Parda (45,0%)', 'Cercospora (55,0%)'],
+        pests: ['Lagartas (28,7/m²)', 'Percevejos (16,2/m² - ascensão forte)'],
+        nutrients: 'Fim da absorção radicular - apenas redistribuição interna'
+    }
+},
+{
+    name: 'R7',
+    fullName: 'Início da Maturação',
+    description: 'Primeira vagem madura (marrom/amarela)',
+    day: 105, // ajuste conforme seu ciclo
+    phase: 'maturity',
+    image: 'imagens/soja_r7.jpg',
+    info: {
+        diseases: ['Macrophomina (75,0%)', 'Mancha Parda (70,0%)', 'Cercospora (60,0%)'],
+        pests: ['Percevejos (10,5/m²)', 'Declínio geral de pragas foliares'],
+        nutrients: 'Translocação final - foco em qualidade dos grãos'
+    }
+},
+{
+    name: 'R8',
+    fullName: 'Maturação Plena',
+    description: '95% das vagens maduras',
+    day: 110,
+    phase: 'maturity',
+    image: 'imagens/soja_r8.jpg',
+    info: {
+        diseases: ['Macrophomina (85,0%)', 'Mancha Parda (85,0%)', 'Oídio (98,75% - PICO)'],
+        pests: ['Percevejos (12,1/m²)', 'Todas as pragas em declínio natural'],
+        nutrients: 'Translocação de nutrientes para grãos - acompanhamento apenas'
+    }
+},
+{
+    name: 'R9',
+    fullName: 'Colheita',
+    description: 'Ponto de colheita',
+    day: 115,
+    phase: 'maturity',
+    image: 'imagens/soja_r9.jpg',
+    info: {
+        diseases: ['Macrophomina em resíduos', 'Cercospora em folhas secas', 'Mancha Parda em resíduos', 'Fusarium e Phomopsis nas matérias secas', 'Aspergillus e Penicillium em grãos armazenados'],
+        pests: ['Percevejos remanescentes', 'Larvas de Sitophilus e Zabrotes em armazenamento', 'Tribolium e coleópteros de armazenamento'],
+        nutrients: 'Importância do manejo: regulagem da colheitadeira, enterrar resíduos, rotação de culturas, limpeza de máquinas, armazenamento correto'
+    }
+}
+
+
+              </script>
+                        </body>
+                        </html>
+                    
