@@ -1,68 +1,4 @@
-
-                        <!DOCTYPE html>
-                        <html lang="en">
-                        <head>
-                            <meta charset="UTF-8">
-                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <style>
-                body {
-                  background-color: white; /* Ensure the iframe has a white background */
-                }
-
-                .stage-card {
-    min-width: 260px; /* aumentado de 220px */
-    background: white;
-    border-radius: 20px;
-    padding: 30px 20px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    position: relative;
-    flex-shrink: 0;
-    filter: grayscale(100%);
-    opacity: 0.6;
-}
-
-.stage-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
-    opacity: 0.8;
-}
-
-.stage-card.active {
-    transform: translateY(-10px) scale(1.05);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-    z-index: 10;
-    filter: grayscale(0%);
-    opacity: 1;
-}
-
-.stage-icon {
-    width: 120px;   /* ← AUMENTADO */
-    height: 120px;  /* ← AUMENTADO */
-    margin: 0 auto 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    background: #f8f9fa;
-}
-
-.stage-icon img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* preserva proporção e mostra todos os detalhes */
-    pointer-events: none;
-}
-
-
-              </style>
-                        </head>
-                        <body>
-                            <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8" />
@@ -111,7 +47,7 @@
         .carousel-track::-webkit-scrollbar { display: none; }
 
         .stage-card {
-            min-width: 260px; /* aumentado */
+            min-width: 260px;
             background: white;
             border-radius: 20px;
             padding: 30px 20px;
@@ -138,8 +74,8 @@
         }
 
         .stage-icon {
-            width: 120px;   /* ← AUMENTADO */
-            height: 120px;  /* ← AUMENTADO */
+            width: 120px;
+            height: 120px;
             margin: 0 auto 20px;
             display: flex;
             align-items: center;
@@ -206,7 +142,7 @@
         @media (max-width: 768px) {
             .header h1 { font-size: 1.6rem; }
             .stage-card { min-width: 200px; padding: 20px 15px; }
-            .stage-icon { width: 100px; height: 100px; } /* ajuste para mobile */
+            .stage-icon { width: 100px; height: 100px; }
             .nav-button { width: 40px; height: 40px; font-size: 1.2rem; }
             .logo-space { flex-direction: column; gap: 15px; }
             .qr-code, .company-logo { width: 70px; height: 70px; }
@@ -241,7 +177,7 @@
     <script>
         const stages = [
             {
-                name: 'VE', fullName: 'Emergência', description: 'Plântula rompe o solo', day: 0, phase: 'vegetative', image: 'imagens/soja_ve.jpg',
+                name: 'VE', fullName: 'Emergência', description: 'Plântula rompe o solo', day: 0, phase: 'vegetative', image: 'imagens/soja_ve.png',
                 info: {
                     diseases: ['Tombamento de plântulas', 'Podridões de raiz e colo', 'Patógenos transmitidos via semente'],
                     pests: ['Corós', 'Larvas de Diabrotica', 'Lesmas e caracóis', 'Cupins'],
@@ -249,7 +185,7 @@
                 }
             },
             {
-                name: 'VC', fullName: 'Cotilédones', description: 'Cotilédones abertos', day: 3, phase: 'vegetative', image: 'imagens/soja_vc.jpg',
+                name: 'VC', fullName: 'Cotilédones', description: 'Cotilédones abertos', day: 3, phase: 'vegetative', image: 'imagens/soja_vc.png',
                 info: {
                     diseases: ['Proteção inicial contra tombamento'],
                     pests: ['Monitoramento preventivo de solo'],
@@ -257,7 +193,7 @@
                 }
             },
             {
-                name: 'V1', fullName: '1ª Folha', description: '1ª folha trifoliolada', day: 8, phase: 'vegetative', image: 'imagens/soja_v1.jpg',
+                name: 'V1', fullName: '1ª Folha', description: '1ª folha trifoliolada', day: 8, phase: 'vegetative', image: 'imagens/soja_v1.png',
                 info: {
                     diseases: ['Fase inicial de desenvolvimento'],
                     pests: ['Monitoramento preventivo'],
@@ -265,7 +201,7 @@
                 }
             },
             {
-                name: 'V2', fullName: '2ª Folha', description: '2ª folha trifoliolada', day: 16, phase: 'vegetative', image: 'imagens/soja_v2.jpg',
+                name: 'V2', fullName: '2ª Folha', description: '2ª folha trifoliolada', day: 16, phase: 'vegetative', image: 'imagens/soja_v2.png',
                 info: {
                     diseases: ['Crestamento Bacteriano (5,0%)'],
                     pests: ['Tripes começam a aparecer'],
@@ -273,7 +209,7 @@
                 }
             },
             {
-                name: 'V4', fullName: '4ª Folha', description: '4ª folha trifoliolada', day: 20, phase: 'vegetative', image: 'imagens/soja_v4.jpg',
+                name: 'V4', fullName: '4ª Folha', description: '4ª folha trifoliolada', day: 20, phase: 'vegetative', image: 'imagens/soja_v4.png',
                 info: {
                     diseases: ['Míldio (15,0%)', 'Crestamento Bacteriano (12,0%)', 'Pústula Bacteriana (4,0%)'],
                     pests: ['Aumento de tripes e lagartas'],
@@ -281,7 +217,7 @@
                 }
             },
             {
-                name: 'R1', fullName: 'Início do Florescimento', description: '1 flor visível', day: 25, phase: 'flowering', image: 'imagens/soja_r1.jpg',
+                name: 'R1', fullName: 'Início do Florescimento', description: '1 flor visível', day: 25, phase: 'flowering', image: 'imagens/soja_r1.png',
                 info: {
                     diseases: ['Míldio (25,0% - PICO)', 'Crestamento Bacteriano (15,0%)', 'Oídio (20,25%)'],
                     pests: ['Tripes (56/m²)', 'Lagartas (15,2/m²)', 'Mosca-branca (32/m² - PICO)'],
@@ -289,7 +225,7 @@
                 }
             },
             {
-                name: 'R2', fullName: 'Flor Aberta', description: 'Flor aberta no terço superior da planta', day: 62, phase: 'flowering', image: 'imagens/soja_r2.jpg',
+                name: 'R2', fullName: 'Flor Aberta', description: 'Flor aberta no terço superior da planta', day: 62, phase: 'flowering', image: 'imagens/soja_r2.png',
                 info: {
                     diseases: ['Míldio (20,0%)', 'Pústula Bacteriana (15,0%)', 'Mofo Branco (12,0%)'],
                     pests: ['Tripes (43/m²)', 'Lagartas (25,8/m²)', 'Percevejos (0,46/m²)'],
@@ -297,7 +233,7 @@
                 }
             },
             {
-                name: 'R4', fullName: 'Vagem de 5mm', description: 'Vagem de 5mm em um dos 4 primeiros nós', day: 72, phase: 'podding', image: 'imagens/soja_r4.jpg',
+                name: 'R4', fullName: 'Vagem de 5mm', description: 'Vagem de 5mm em um dos 4 primeiros nós', day: 72, phase: 'podding', image: 'imagens/soja_r4.png',
                 info: {
                     diseases: ['Ferrugem Asiática (65,0%)', 'Mofo Branco (45,0%)', 'Mancha Parda (8,0%)'],
                     pests: ['LAGARTAS (49,86/m² - PICO ABSOLUTO!)', 'Percevejos (8,5/m²)', '⚠️ 95% do consumo foliar ocorre aqui'],
@@ -305,7 +241,7 @@
                 }
             },
             {
-                name: 'R5.1', fullName: 'Enchimento de Grãos', description: 'Início do enchimento de grãos', day: 85, phase: 'grain', image: 'imagens/soja_r51.jpg',
+                name: 'R5.1', fullName: 'Enchimento de Grãos', description: 'Início do enchimento de grãos', day: 85, phase: 'grain', image: 'imagens/soja_r51.png',
                 info: {
                     diseases: ['Ferrugem Asiática (85,0%)', 'Oídio (73,75%)', 'Mancha Parda (20,0%)'],
                     pests: ['Lagartas (42,3/m²)', 'Percevejos (12,7/m² - crescimento rápido)'],
@@ -313,7 +249,7 @@
                 }
             },
             {
-                name: 'R6', fullName: 'Grãos Formados', description: 'Grãos totalmente formados', day: 95, phase: 'grain', image: 'imagens/soja_r6.jpg',
+                name: 'R6', fullName: 'Grãos Formados', description: 'Grãos totalmente formados', day: 95, phase: 'grain', image: 'imagens/soja_r6.png',
                 info: {
                     diseases: ['Ferrugem Asiática (95,0% - PICO)', 'Mancha Parda (45,0%)', 'Cercospora (55,0%)'],
                     pests: ['Lagartas (28,7/m²)', 'Percevejos (16,2/m² - ascensão forte)'],
@@ -321,7 +257,7 @@
                 }
             },
             {
-                name: 'R7', fullName: 'Início da Maturação', description: 'Primeira vagem madura (marrom/amarela)', day: 105, phase: 'maturity', image: 'imagens/soja_r7.jpg',
+                name: 'R7', fullName: 'Início da Maturação', description: 'Primeira vagem madura (marrom/amarela)', day: 105, phase: 'maturity', image: 'imagens/soja_r7.png',
                 info: {
                     diseases: ['Macrophomina (75,0%)', 'Mancha Parda (70,0%)', 'Cercospora (60,0%)'],
                     pests: ['Percevejos (10,5/m²)', 'Declínio geral de pragas foliares'],
@@ -329,7 +265,7 @@
                 }
             },
             {
-                name: 'R8', fullName: 'Maturação Plena', description: '95% das vagens maduras', day: 110, phase: 'maturity', image: 'imagens/soja_r8.jpg',
+                name: 'R8', fullName: 'Maturação Plena', description: '95% das vagens maduras', day: 110, phase: 'maturity', image: 'imagens/soja_r8.png',
                 info: {
                     diseases: ['Macrophomina (85,0%)', 'Mancha Parda (85,0%)', 'Oídio (98,75% - PICO)'],
                     pests: ['Percevejos (12,1/m²)', 'Todas as pragas em declínio natural'],
@@ -337,7 +273,7 @@
                 }
             },
             {
-                name: 'R9', fullName: 'Colheita', description: 'Ponto de colheita', day: 115, phase: 'maturity', image: 'imagens/soja_r9.jpg',
+                name: 'R9', fullName: 'Colheita', description: 'Ponto de colheita', day: 115, phase: 'maturity', image: 'imagens/soja_r9.png',
                 info: {
                     diseases: ['Macrophomina em resíduos', 'Cercospora em folhas secas', 'Mancha Parda em resíduos', 'Fusarium e Phomopsis nas matérias secas', 'Aspergillus e Penicillium em grãos armazenados'],
                     pests: ['Percevejos remanescentes', 'Larvas de Sitophilus e Zabrotes em armazenamento', 'Tribolium e coleópteros de armazenamento'],
@@ -406,77 +342,3 @@
 </body>
 </html>
 
-
-
-              <script>
-                              {
-    name: 'R5.1',
-    fullName: 'Enchimento de Grãos',
-    description: 'Início do enchimento de grãos',
-    day: 85,
-    phase: 'grain',
-    image: 'imagens/soja_r51.jpg',
-    info: {
-        diseases: ['Ferrugem Asiática (85,0%)', 'Oídio (73,75%)', 'Mancha Parda (20,0%)'],
-        pests: ['Lagartas (42,3/m²)', 'Percevejos (12,7/m² - crescimento rápido)'],
-        nutrients: 'CRÍTICO: 90-99% absorvido (Fe:99%, B:94%, Ca:99%)'
-    }
-},
-{
-    name: 'R6',
-    fullName: 'Grãos Formados',
-    description: 'Grãos totalmente formados',
-    day: 95,
-    phase: 'grain',
-    image: 'imagens/soja_r6.jpg',
-    info: {
-        diseases: ['Ferrugem Asiática (95,0% - PICO)', 'Mancha Parda (45,0%)', 'Cercospora (55,0%)'],
-        pests: ['Lagartas (28,7/m²)', 'Percevejos (16,2/m² - ascensão forte)'],
-        nutrients: 'Fim da absorção radicular - apenas redistribuição interna'
-    }
-},
-{
-    name: 'R7',
-    fullName: 'Início da Maturação',
-    description: 'Primeira vagem madura (marrom/amarela)',
-    day: 105, // ajuste conforme seu ciclo
-    phase: 'maturity',
-    image: 'imagens/soja_r7.jpg',
-    info: {
-        diseases: ['Macrophomina (75,0%)', 'Mancha Parda (70,0%)', 'Cercospora (60,0%)'],
-        pests: ['Percevejos (10,5/m²)', 'Declínio geral de pragas foliares'],
-        nutrients: 'Translocação final - foco em qualidade dos grãos'
-    }
-},
-{
-    name: 'R8',
-    fullName: 'Maturação Plena',
-    description: '95% das vagens maduras',
-    day: 110,
-    phase: 'maturity',
-    image: 'imagens/soja_r8.jpg',
-    info: {
-        diseases: ['Macrophomina (85,0%)', 'Mancha Parda (85,0%)', 'Oídio (98,75% - PICO)'],
-        pests: ['Percevejos (12,1/m²)', 'Todas as pragas em declínio natural'],
-        nutrients: 'Translocação de nutrientes para grãos - acompanhamento apenas'
-    }
-},
-{
-    name: 'R9',
-    fullName: 'Colheita',
-    description: 'Ponto de colheita',
-    day: 115,
-    phase: 'maturity',
-    image: 'imagens/soja_r9.jpg',
-    info: {
-        diseases: ['Macrophomina em resíduos', 'Cercospora em folhas secas', 'Mancha Parda em resíduos', 'Fusarium e Phomopsis nas matérias secas', 'Aspergillus e Penicillium em grãos armazenados'],
-        pests: ['Percevejos remanescentes', 'Larvas de Sitophilus e Zabrotes em armazenamento', 'Tribolium e coleópteros de armazenamento'],
-        nutrients: 'Importância do manejo: regulagem da colheitadeira, enterrar resíduos, rotação de culturas, limpeza de máquinas, armazenamento correto'
-    }
-}
-
-
-              </script>
-                        </body>
-                        </html>
-                    
